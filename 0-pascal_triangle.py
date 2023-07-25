@@ -35,12 +35,3 @@ def pascal_triangle(n: int) -> List[List]:
         pascal.append(temp)
 
     return pascal
-
-def print_triangle(triangle):
-    """
-    Print the triangle
-    """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
-
-print_triangle(pascal_triangle(10))
