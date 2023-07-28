@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-    Define the Pascal Triangle function
+    Defines the pascal_triangle function
 """
-from typing import List
 
 
 def pascal_triangle(n):
