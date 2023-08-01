@@ -2,6 +2,7 @@
 """
     Defines the canUnlockAll function
 """
+import sys
 
 
 def canUnlockAll(boxes):
@@ -13,6 +14,7 @@ def canUnlockAll(boxes):
         Returns:
             boolean
     """
+    sys.setrecursionlimit(1000000)  # SET RECURSION LIMIT NUMBER.
     lock_status = [False] * len(boxes)
 
     def unlock_boxes(boxes, index):
@@ -25,18 +27,20 @@ def canUnlockAll(boxes):
         Returns:
             list[boolean]
         """
-        if (not lock_status[index]) and (index < len(boxes)):
-            lock_status[index] = True
-        else:
+        try:
+            if not lock_status[index]:
+                lock_status[index] = True
+            else:
+                return
+
+            keys = boxes[index]
+            if not keys:
+                return
+
+            for key in keys:
+                unlock_boxes(boxes, key)
+        except IndexError:
             return
-
-        keys = boxes[index]
-
-        if not keys:
-            return
-
-        for key in keys:
-            unlock_boxes(boxes, key)
 
     unlock_boxes(boxes, 0)
     return all(lock_status)
