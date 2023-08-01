@@ -43,9 +43,7 @@ def canUnlockAll(boxes):
 
         return already_unlocked
 
-    box_0 = boxes[0]
-
-    if len(unlock_boxes(box_0, boxes)) == len(boxes):
+    if len(unlock_boxes(boxes[0], boxes)) == len(boxes):
         return True
 
     return False
