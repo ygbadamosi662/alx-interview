@@ -1,0 +1,52 @@
+#!/usr/bin/python3
+"""
+    Defines the canUnlockAll function
+"""
+
+
+def unlock_boxes(unlocked_box, boxes, already_unlocked=None):
+    """
+    This function unlock boxes recursively if boxes is a list of box
+    provide one unlocked box in the list as unlocked_box
+    Returns a list of unlocked_boxes including unlocked_box
+
+    Args:
+        unlocked_box (_type_): list
+        boxes (_type_): list
+        already_unlocked: list, default = None
+    Returns:
+        list
+    """
+    if already_unlocked is None:
+        already_unlocked = [unlocked_box]
+    unlocked_here = []
+
+    for val in unlocked_box:
+        if (val < len(boxes)) and (boxes[val] not in already_unlocked):
+            unlocked_here.append(boxes[val])
+            already_unlocked.append(boxes[val])
+
+    if unlocked_here == []:
+        return already_unlocked
+
+    for keys in unlocked_here:
+        unlock_boxes(keys, boxes, already_unlocked)
+
+    return already_unlocked
+
+
+def canUnlockAll(boxes):
+    """
+        Represents canUnlockAll for boxes
+
+        Args:
+            boxes (_type_): list
+        Returns:
+            boolean
+    """
+    box_0 = boxes[0]
+
+    if len(unlock_boxes(box_0, boxes)) == len(boxes):
+        return True
+
+    return False
