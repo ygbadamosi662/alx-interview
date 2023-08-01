@@ -13,37 +13,30 @@ def canUnlockAll(boxes):
         Returns:
             boolean
     """
-    def unlock_boxes(unlocked_box, boxes, already_unlocked=None):
+    lock_status = [False] * len(boxes)
+
+    def unlock_boxes(boxes, index):
         """
         This function unlock boxes recursively if boxes is a list of box
-        provide one unlocked box in the list as unlocked_box
-        Returns a list of unlocked_boxes including unlocked_box
 
         Args:
-            unlocked_box (list)
             boxes (list[list])
-            already_unlockedlist[list]: default = None
+            index (integer)
         Returns:
-            list[list]
+            list[boolean]
         """
-        if already_unlocked is None:
-            already_unlocked = [unlocked_box]
-        unlocked_here = []
+        if (not lock_status[index]) and (index < len(boxes)):
+            lock_status[index] = True
+        else:
+            return
 
-        for val in unlocked_box:
-            if (val < len(boxes)) and (boxes[val] not in already_unlocked):
-                unlocked_here.append(boxes[val])
-                already_unlocked.append(boxes[val])
+        keys = boxes[index]
 
-        if unlocked_here == []:
-            return already_unlocked
+        if not keys:
+            return
 
-        for keys in unlocked_here:
-            unlock_boxes(keys, boxes, already_unlocked)
+        for key in keys:
+            unlock_boxes(boxes, key)
 
-        return already_unlocked
-
-    if len(unlock_boxes(boxes[0], boxes)) == len(boxes):
-        return True
-
-    return False
+    unlock_boxes(boxes, 0)
+    return all(lock_status)
