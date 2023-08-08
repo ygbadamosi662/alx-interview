@@ -1,7 +1,6 @@
 """
+Defines a function minOperations
 """
-from functools import reduce
-import math
 
 
 def minOperations(n):
@@ -18,7 +17,7 @@ def minOperations(n):
     ops = 0
     for i in range(2, int(n ** 0.5) + 1):
         while n % i == 0:
-            operations += i
+            ops += i
             n //= i
 
     if n > 1:
