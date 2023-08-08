@@ -12,7 +12,7 @@ def minOperations(n):
         n (integer): the number of times an operation is made to reach this
         integer.
     """
-    if n == 1:
+    if n < 2:
         return 0
 
     ops = 0
