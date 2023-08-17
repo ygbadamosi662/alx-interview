@@ -43,7 +43,7 @@ try:
     i = 0
     j = 0
 
-    def print_shit(interrupted=''):
+    def print_shit():
         """
         Defines function print_shit, prints the dict print_out
         in the below format:
@@ -51,12 +51,9 @@ try:
         status code: code
         ...
 
-        Args:
-        interrupted: str, '' by default
-
         Return: does not return anything
         """
-        print(interrupted+'File Size: {}'.format(print_out.get('file_size')))
+        print('File Size: {}'.format(print_out.get('file_size')))
         sorted_keys = sorted(print_out['status_codes'].keys())
 
         for key in sorted_keys:
@@ -82,4 +79,4 @@ try:
             i = j
             print_shit()
 except KeyboardInterrupt:
-    print_shit('^C')
+    print_shit()
