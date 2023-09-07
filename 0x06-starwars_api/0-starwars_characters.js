@@ -5,17 +5,15 @@ const url = `https://swapi-api.hbtn.io/api/films/${process.argv[2]}/`;
 
 request(url, (err, res, body) => {
   if (err) console.log(err);
-  const index = 0;
   const characters = JSON.parse(body).characters;
-  printCharacter(characters, index);
+  printCharacter(characters);
 });
 
-const printCharacter = function (url, i) {
-  request(url[i], (err, res, body) => {
-    if (err) console.log(err);
-    console.log(JSON.parse(body).name);
-    if (++i < url.length) {
-      printCharacter(url, i++);
-    }
-  });
+const printCharacter = function (url) {
+  for (let i = 0; i < url.length; i++) {
+    request(url[i], (err, res, body) => {
+      if (err) console.log(err);
+      if (res.statusCode === 200) console.log(JSON.parse(body).name);
+    });
+  }
 };
